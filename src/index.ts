@@ -1,12 +1,12 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 
-const app = express();
+export const app = express();
 const port = process.env.PORT || 3000;
-const HTTP_STATUSES = {
+export const HTTP_STATUSES = {
     OK_200: 200,
     CREATED_201: 201,
     NO_CONTENT_204: 204,
-    
+
     BAD_REQUEST_400: 400,
     UNAUTHORIZED_401: 401,
     NOT_FOUND_404: 404
@@ -24,9 +24,6 @@ const db = {
     ]
 }
 
-app.get('/', (req, res) => {
-    res.json("Main Page");
-});
 app.get('/courses', (req, res) => {
     let foundCourses = db.courses;
 
@@ -40,7 +37,7 @@ app.get('/courses', (req, res) => {
 app.get('/courses/:id', (req, res) => {
     const foundCourse = db.courses.find(value => value.id === +req.params.id);
 
-    if(!foundCourse) {
+    if (!foundCourse) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
@@ -79,7 +76,7 @@ app.put('/courses/:id', (req, res) => {
     }
 
     const foundCourse = db.courses.find(value => value.id === +req.params.id);
-    if(!foundCourse) {
+    if (!foundCourse) {
         res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
         return;
     }
@@ -88,6 +85,10 @@ app.put('/courses/:id', (req, res) => {
 
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 });
+app.delete('/__test__/data', (req: Request, res: Response) => {
+    db.courses = [];
+    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
+})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

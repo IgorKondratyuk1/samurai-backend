@@ -6,7 +6,8 @@
     "watch": "tsc -w",
     "dev": "nodemon --inspect dist/index.js",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "test": "jest"
   },
   "name": "03-REST-API",
   "version": "1.0.0",
@@ -14,8 +15,13 @@
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/jest": "^29.0.3",
     "@types/node": "^18.7.16",
+    "@types/supertest": "^2.0.12",
+    "jest": "^29.0.3",
     "nodemon": "^2.0.19",
+    "supertest": "^6.2.4",
+    "ts-jest": "^29.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.3"
   }
