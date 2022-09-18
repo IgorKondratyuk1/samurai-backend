@@ -24,6 +24,11 @@ const db = {
     ]
 }
 
+app.delete('/__test__/data', (req: Request, res: Response) => {
+    db.courses = [];
+    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
+});
+
 app.get('/courses', (req, res) => {
     let foundCourses = db.courses;
 
@@ -85,10 +90,6 @@ app.put('/courses/:id', (req, res) => {
 
     res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
 });
-app.delete('/__test__/data', (req: Request, res: Response) => {
-    db.courses = [];
-    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
-})
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
